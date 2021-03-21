@@ -1,17 +1,23 @@
+/*
+ * react-navigation types
+ */
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
 };
-
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Dining: undefined;
+  Laundry: undefined;
+  Maps: undefined;
+  Settings: undefined;
 };
-
-export type TabOneParamList = {
-  TabOneScreen: undefined;
+export type SettingsStackParamList = {
+  Settings: undefined;
+  Developers: undefined;
 };
-
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
-};
+export enum Tab {
+  DINING = "Dining",
+  LAUNDRY = "Laundry",
+  MAPS = "Maps",
+  SETTINGS = "Settings",
+}
