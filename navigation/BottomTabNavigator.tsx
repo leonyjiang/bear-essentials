@@ -6,7 +6,9 @@ import { BottomTabParamList, Tab } from "../types";
 import { DiningScreen, LaundryScreen, MapsScreen } from "../screens";
 import SettingsStackNavigator from "./SettingsStackNavigator";
 import { getTabBarIcon } from "../utils";
+import { Layout } from "../constants";
 
+const { bottomTabBarHeight } = Layout;
 /*
  * Bottom tabs for navigation across tabs.
  */
@@ -22,7 +24,7 @@ export default function BottomTabNavigator() {
       initialRouteName={Tab.DINING}
       tabBarOptions={{
         showLabel: false,
-        style: { height: 83, paddingTop: 3 },
+        style: { height: bottomTabBarHeight, paddingTop: 3 },
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) =>
