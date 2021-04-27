@@ -101,7 +101,7 @@ const MapsScreen = () => {
         onPress={goToBrownsLocation}
         style={[
           styles.myLocationButton,
-          { bottom: locationPermission == PermissionStatus.GRANTED ? 76 : 10 },
+          { bottom: locationPermission == PermissionStatus.GRANTED ? 73 : 10 },
         ]}
       />
     </View>

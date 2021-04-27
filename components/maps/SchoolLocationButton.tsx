@@ -61,7 +61,7 @@ const SchoolLocationButton: React.FC<SchoolLocationButtonProps> = ({
    */
   const animatedStyles = useAnimatedStyle<ViewStyle>(() => ({
     shadowRadius: 4 * progress.value + 2,
-    shadowOffset: { width: 0, height: 5 * progress.value + 2 },
+    shadowOffset: { width: 0, height: 4 * progress.value + 2 },
   }));
 
   return (
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.33,
   },
 });
 

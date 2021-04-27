@@ -8,7 +8,7 @@ import SettingsStackNavigator from "./SettingsStackNavigator";
 import { getTabBarIcon } from "../utils";
 import { Layout } from "../constants";
 
-const { bottomTabBarHeight } = Layout;
+const { getBottomTabBarHeight, getTabBarPadding } = Layout;
 /*
  * Bottom tabs for navigation across tabs.
  */
@@ -19,12 +19,17 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   const isDarkTheme = colorScheme === "dark";
+  const tabBarPadding = getTabBarPadding();
   return (
     <BottomTab.Navigator
       initialRouteName={Tab.DINING}
       tabBarOptions={{
         showLabel: false,
-        style: { height: bottomTabBarHeight, paddingTop: 3 },
+        style: {
+          height: getBottomTabBarHeight(),
+          paddingTop: tabBarPadding.top,
+          paddingBottom: tabBarPadding.bottom,
+        },
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) =>
