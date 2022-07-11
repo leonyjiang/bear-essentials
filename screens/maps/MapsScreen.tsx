@@ -9,9 +9,13 @@ import {
 } from "expo-location";
 
 import useColorScheme from "../../hooks/useColorScheme";
-import { SchoolLocationButton } from "../../components";
+import { SchoolLocationButton, ScreenHeader } from "../../components";
 import { View } from "../../components/Themed";
 import { Maps } from "../../constants";
+import { BottomTabParamList, Tab } from "../../types";
+import { RouteProp, useFocusEffect } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const {
   initialRegion,
@@ -21,18 +25,31 @@ const {
   mapStyle,
 } = Maps;
 
+type MapsScreenNavigationProp = StackNavigationProp<BottomTabParamList, "Maps">;
+type MapsScreenRouteProp = RouteProp<BottomTabParamList, "Maps">;
+interface MapsScreenProps {
+  navigation: MapsScreenNavigationProp;
+  route: MapsScreenRouteProp;
+}
+
 /*
  * The screen shown for the maps tab of the app, which allows the user to view
  * various points of interest at Brown (cafes, lecture halls, bathrooms, etc.).
  */
-const MapsScreen = () => {
+const MapsScreen = ({ navigation, route }: MapsScreenProps) => {
+  const tab: Tab = route.name as Tab;
+  const hdrPaddingTop = useSafeAreaInsets().top;
+
+  useFocusEffect(() => {
+    const unsubscribe = navigation.addListener("tabPress", goToBrownsLocation);
+    return unsubscribe;
+  });
+
   /*
    * The user's location permissions.
    */
-  const [
-    locationPermission,
-    setLocationPermission,
-  ] = useState<PermissionStatus>(PermissionStatus.UNDETERMINED);
+  const [locationPermission, setLocationPermission] =
+    useState<PermissionStatus>(PermissionStatus.UNDETERMINED);
   /*
    * Set custom map style according to app theme.
    */
@@ -84,6 +101,7 @@ const MapsScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ScreenHeader style={{ paddingTop: hdrPaddingTop + 10 }} tab={tab} />
       <MapView
         ref={mapRef}
         provider="google"

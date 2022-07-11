@@ -9,11 +9,11 @@ import Navigation from "./navigation";
 import { SplashScreen } from "./screens";
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
+  let isLoadingComplete = useCachedResources();
+  let colorScheme = useColorScheme();
+  let [isAnimationComplete, setIsAnimationComplete] = useState(false);
 
-  const onAnimationEnd = () => {
+  let onAnimationEnd = () => {
     "worklet";
     runOnJS(setIsAnimationComplete)(true);
   };

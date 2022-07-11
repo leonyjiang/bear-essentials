@@ -10,9 +10,9 @@ import Animated, {
 
 import { TextProps } from "../../components/Themed";
 import { AnimatedLetter } from "../common";
-import { Names } from "../../constants";
+import { Strings } from "../../constants";
 
-const { appName } = Names;
+const { appName } = Strings;
 const wordLength = appName.length;
 
 interface AnimatedTitleProps extends TextProps {

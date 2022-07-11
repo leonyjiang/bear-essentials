@@ -25,19 +25,19 @@ interface SplashScreenProps {
  */
 const SplashScreen = ({ onAnimationEnd }: SplashScreenProps) => {
   // Below are values used in the splash screen animation.
-  const fromValue: number = 0;
-  const toValue: number = 1;
-  const midValue: number = (toValue - fromValue) / 2;
-  const progress = useSharedValue<number>(fromValue);
+  const FROM_VALUE: number = 0;
+  const TO_VALUE: number = 1;
+  const MID_VALUE: number = (TO_VALUE - FROM_VALUE) / 2;
+  let progress = useSharedValue<number>(FROM_VALUE);
 
   // Various animation stop points, expressed as decimals.
-  const logoEnterBeginStop: number = 0;
-  const logoEnterEndStop: number = 0.1;
-  const titleEnterBeginStop: number = 0.2;
-  const titleEnterEndStop: number = 0.6;
-  const exitBeginStop: number = 0.9;
-  const titleExitEndStop: number = 0.91;
-  const logoExitEndStop: number = 1;
+  const LOGO_ENTER_BEGIN_STOP: number = 0;
+  const LOGO_ENTER_END_STOP: number = 0.1;
+  const TITLE_ENTER_BEGIN_STOP: number = 0.2;
+  const TITLE_ENTER_END_STOP: number = 0.6;
+  const EXIT_BEGIN_STOP: number = 0.9;
+  const TITLE_EXIT_END_STOP: number = 0.91;
+  const LOGO_EXIT_END_STOP: number = 1;
 
   /*
    * The interpolated animation value for the logo's animation.
@@ -46,8 +46,13 @@ const SplashScreen = ({ onAnimationEnd }: SplashScreenProps) => {
     interpolate(
       progress.value,
       // The values signify the two legs of the animation—enter and exit.
-      [logoEnterBeginStop, logoEnterEndStop, exitBeginStop, logoExitEndStop],
-      [fromValue, midValue, midValue, toValue]
+      [
+        LOGO_ENTER_BEGIN_STOP,
+        LOGO_ENTER_END_STOP,
+        EXIT_BEGIN_STOP,
+        LOGO_EXIT_END_STOP,
+      ],
+      [FROM_VALUE, MID_VALUE, MID_VALUE, TO_VALUE]
     )
   );
   /*
@@ -57,8 +62,13 @@ const SplashScreen = ({ onAnimationEnd }: SplashScreenProps) => {
     interpolate(
       progress.value,
       // The values signify the two legs of the animation—enter and exit.
-      [titleEnterBeginStop, titleEnterEndStop, exitBeginStop, titleExitEndStop],
-      [fromValue, midValue, midValue, toValue]
+      [
+        TITLE_ENTER_BEGIN_STOP,
+        TITLE_ENTER_END_STOP,
+        EXIT_BEGIN_STOP,
+        TITLE_EXIT_END_STOP,
+      ],
+      [FROM_VALUE, MID_VALUE, MID_VALUE, TO_VALUE]
     )
   );
 
@@ -67,7 +77,7 @@ const SplashScreen = ({ onAnimationEnd }: SplashScreenProps) => {
     progress.value = withDelay(
       1000,
       withTiming(
-        toValue,
+        TO_VALUE,
         {
           duration: 4500,
           easing: Easing.linear,
@@ -85,16 +95,16 @@ const SplashScreen = ({ onAnimationEnd }: SplashScreenProps) => {
     >
       <AnimatedLogo
         progress={logoProgress}
-        fromValue={fromValue}
-        midValue={midValue}
-        toValue={toValue}
+        fromValue={FROM_VALUE}
+        midValue={MID_VALUE}
+        toValue={TO_VALUE}
         style={styles.logo}
       />
       <AnimatedTitle
         progress={titleProgress}
-        fromValue={fromValue}
-        midValue={midValue}
-        toValue={toValue}
+        fromValue={FROM_VALUE}
+        midValue={MID_VALUE}
+        toValue={TO_VALUE}
         style={styles.title}
       />
     </View>
